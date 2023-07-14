@@ -3,8 +3,7 @@ import 'package:meals/provider/filters_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FiltersScreen extends ConsumerStatefulWidget {
-  const FiltersScreen({super.key, required this.currentfilters});
-  final Map<Filter, bool> currentfilters;
+  const FiltersScreen({super.key});
 
   @override
   ConsumerState<FiltersScreen> createState() => _FiltersScreenState();
@@ -18,11 +17,12 @@ class _FiltersScreenState extends ConsumerState<FiltersScreen> {
 
   @override
   void initState() {
-    _glutenfreeset = widget.currentfilters[Filter.GlutenFree]!;
-    _lactosefreeset = widget.currentfilters[Filter.LactoseFree]!;
-    _vegetarianset = widget.currentfilters[Filter.Vegetarian]!;
-    _veganset = widget.currentfilters[Filter.Vegan]!;
     super.initState();
+    final activefilters = ref.read(filtersprovider);
+    _glutenfreeset = activefilters[Filter.GlutenFree]!;
+    _lactosefreeset = activefilters[Filter.LactoseFree]!;
+    _vegetarianset = activefilters[Filter.Vegetarian]!;
+    _veganset = activefilters[Filter.Vegan]!;
   }
 
   @override
