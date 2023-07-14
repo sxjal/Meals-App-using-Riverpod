@@ -2,8 +2,10 @@
 
 import 'package:meals/modal/meal.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meals/provider/favouriteprovider.dart';
 
-class MealSpecific extends StatelessWidget {
+class MealSpecific extends ConsumerWidget {
   const MealSpecific({
     super.key,
     required this.meal,
@@ -12,14 +14,24 @@ class MealSpecific extends StatelessWidget {
   final Meal meal;
 
   @override
-  Widget build(context) {
+  Widget build(context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
         actions: [
           IconButton(
             onPressed: () {
-              // ontogglefavorite(meal);
+              final addingstatus = ref
+                  .read(favoritemealsprovider.notifier)
+                  .togglemealfavoritestatus(meal);
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(addingstatus
+                      ? "Added to favorites"
+                      : "Removed from favorites"),
+                ),
+              );
             },
             icon: const Icon(Icons.star),
           ),

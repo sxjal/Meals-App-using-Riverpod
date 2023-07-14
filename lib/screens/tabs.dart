@@ -31,15 +31,6 @@ class _TabsState extends ConsumerState<Tabs> {
     });
   }
 
-  void showinfomessage(String message) {
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
-  }
-
   void onSelectScreen(String screen) async {
     Navigator.of(context).pop();
     if (screen == "Meals") {
