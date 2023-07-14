@@ -26,7 +26,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
       animationBehavior: AnimationBehavior.preserve,
       duration: const Duration(seconds: 2),
       lowerBound: 0,
-      upperBound: 20,
+      upperBound: 1,
     );
 
     _animationController.forward();
@@ -87,10 +87,22 @@ class _CategoriesScreenState extends State<CategoriesScreen>
         ],
       ),
       builder: (context, child) => SlideTransition(
-        position: _animationController.drive(
-          Tween(),
+        position: Tween(
+          begin: const Offset(0, 0.3),
+          end: const Offset(0, 0),
+        ).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeInOutExpo ,
+          ),
         ),
-        child: child,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 15,
+          ),
+          child: child,
+        ),
       ),
     );
   }
