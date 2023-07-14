@@ -2,44 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:meals/provider/filters_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FiltersScreen extends ConsumerStatefulWidget {
+class FiltersScreen extends ConsumerWidget {
   const FiltersScreen({super.key});
 
+  
   @override
-  ConsumerState<FiltersScreen> createState() => _FiltersScreenState();
-}
+  Widget build(context, WidgetRef ref) {
 
-class _FiltersScreenState extends ConsumerState<FiltersScreen> {
-  var _glutenfreeset = false;
-  var _lactosefreeset = false;
-  var _vegetarianset = false;
-  var _veganset = false;
-
-  @override
-  void initState() {
-    super.initState();
-    final activefilters = ref.read(filtersprovider);
-    _glutenfreeset = activefilters[Filter.GlutenFree]!;
-    _lactosefreeset = activefilters[Filter.LactoseFree]!;
-    _vegetarianset = activefilters[Filter.Vegetarian]!;
-    _veganset = activefilters[Filter.Vegan]!;
-  }
-
-  @override
-  Widget build(context) {
-    return WillPopScope(
-      //key: Key("filtersscreen"),
-      onWillPop: () async {
-        ref.read(filtersprovider.notifier).setfilters({
-          Filter.GlutenFree: _glutenfreeset,
-          Filter.LactoseFree: _lactosefreeset,
-          Filter.Vegetarian: _vegetarianset,
-          Filter.Vegan: _veganset,
-        });
-
-        return true;
-      },
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: const Text("Your Filters"),
         ),
@@ -117,7 +87,7 @@ class _FiltersScreenState extends ConsumerState<FiltersScreen> {
             ),
           ],
         ),
-      ),
+      
     );
   }
 }

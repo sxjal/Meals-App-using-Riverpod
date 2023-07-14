@@ -16,7 +16,7 @@ class MealSpecific extends ConsumerWidget {
   @override
   Widget build(context, WidgetRef ref) {
     bool addingstatus = true;
-    print("build method executed");
+
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
