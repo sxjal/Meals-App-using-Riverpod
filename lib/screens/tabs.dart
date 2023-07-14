@@ -6,6 +6,7 @@ import 'package:meals/widgets/drawer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/provider/mealsprovider.dart';
 import 'package:meals/provider/favouriteprovider.dart';
+import 'package:meals/provider/filters_provider.dart';
 
 const kinitialfilters = {
   Filter.GlutenFree: false,
