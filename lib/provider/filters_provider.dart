@@ -7,9 +7,24 @@ enum Filter {
   Vegan,
 }
 
-class FiltersNotifier extends StateNotifier<Map<Filter,bool>>{
+class FiltersNotifier extends StateNotifier<Map<Filter, bool>> {
+  FiltersNotifier()
+      : super({
+          Filter.GlutenFree: false,
+          Filter.LactoseFree: false,
+          Filter.Vegetarian: false,
+          Filter.Vegan: false,
+        });
 
+  void setfilter(Filter filter, bool value) {
+    state = {
+      ...state,
+      filter: value,
+    };
+  }
 }
-final filtersprovider = StateNotifierProvider<>((ref) {
+
+final filtersprovider =
+    StateNotifierProvider<FiltersNotifier, Map<Filter, bool>>((ref) {
   return FiltersNotifier();
 });
