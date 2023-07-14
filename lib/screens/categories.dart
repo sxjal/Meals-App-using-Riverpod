@@ -60,38 +60,38 @@ class _CategoriesScreenState extends State<CategoriesScreen>
   @override
   Widget build(context) {
     return AnimatedBuilder(
-        animation: _animationController,
-        child: GridView(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 3 / 2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
-          ),
-          children: [
-            // ...avaialbleCategories.map((category) {
-            //   return GridData(
-            //     category: category,
-            //     selectCategory: () {
-            //       selectCategory(context);
-            //     },
-            //   );
-            // }).toList(),
-            for (final category in avaialbleCategories)
-              GridData(
-                category: category,
-                onSelectCategory: () {
-                  _selectCategory(context, category);
-                },
-              ),
-          ],
+      animation: _animationController,
+      child: GridView(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 3 / 2,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
         ),
-        builder: (context, child) => Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: _animationController.value * 1,
-                vertical: _animationController.value * 1,
-              ),
-              child: child,
-            ));
+        children: [
+          // ...avaialbleCategories.map((category) {
+          //   return GridData(
+          //     category: category,
+          //     selectCategory: () {
+          //       selectCategory(context);
+          //     },
+          //   );
+          // }).toList(),
+          for (final category in avaialbleCategories)
+            GridData(
+              category: category,
+              onSelectCategory: () {
+                _selectCategory(context, category);
+              },
+            ),
+        ],
+      ),
+      builder: (context, child) => SlideTransition(
+        position: _animationController.drive(
+          Tween(),
+        ),
+        child: child,
+      ),
+    );
   }
 }
