@@ -16,6 +16,10 @@ class FiltersNotifier extends StateNotifier<Map<Filter, bool>> {
           Filter.Vegan: false,
         });
 
+  void setfilters(Map<Filter, bool> filters) {
+    state = filters;
+  }
+
   void setfilter(Filter filter, bool value) {
     state = {
       ...state,

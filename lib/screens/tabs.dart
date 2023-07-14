@@ -23,7 +23,6 @@ class Tabs extends ConsumerStatefulWidget {
 }
 
 class _TabsState extends ConsumerState<Tabs> {
-  Map<Filter, bool> _filters = kinitialfilters;
   int _selectedpageindex = 0;
 
   void _selectpage(int index) {
@@ -36,16 +35,14 @@ class _TabsState extends ConsumerState<Tabs> {
     Navigator.of(context).pop();
     if (screen == "Meals") {
     } else if (screen == "Filtered") {
-      final result = await Navigator.of(context).push<Map<Filter, bool>>(
+      await Navigator.of(context).push<Map<Filter, bool>>(
         MaterialPageRoute(
           builder: (ctx) {
             return const FiltersScreen();
           },
         ),
       );
-      setState(() {
-        _filters = result ?? kinitialfilters;
-      });
+
       //print(result);
     }
   }
@@ -59,6 +56,7 @@ class _TabsState extends ConsumerState<Tabs> {
     //ref.watch()
 
     final meals = ref.watch(mealsProvider);
+    final _filters = ref.watch(filtersprovider);
     final avaialblemeals = meals.where((meal) {
       if (_filters[Filter.GlutenFree]! && !meal.isGlutenFree) {
         return false;

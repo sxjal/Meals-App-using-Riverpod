@@ -30,13 +30,14 @@ class _FiltersScreenState extends ConsumerState<FiltersScreen> {
     return WillPopScope(
       //key: Key("filtersscreen"),
       onWillPop: () async {
-        Navigator.of(context).pop({
+        ref.read(filtersprovider.notifier).setfilters({
           Filter.GlutenFree: _glutenfreeset,
           Filter.LactoseFree: _lactosefreeset,
           Filter.Vegetarian: _vegetarianset,
           Filter.Vegan: _veganset,
         });
-        return false;
+
+        return true;
       },
       child: Scaffold(
         appBar: AppBar(
