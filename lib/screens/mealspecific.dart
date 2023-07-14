@@ -4,11 +4,13 @@ import 'package:meals/modal/meal.dart';
 import 'package:flutter/material.dart';
 
 class MealSpecific extends StatelessWidget {
-  const MealSpecific(
-      {super.key, required this.meal, required this.ontogglefavorite});
+  const MealSpecific({
+    super.key,
+    required this.meal,
+  });
 
   final Meal meal;
-  final void Function(Meal) ontogglefavorite;
+
   @override
   Widget build(context) {
     return Scaffold(
@@ -17,7 +19,7 @@ class MealSpecific extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              ontogglefavorite(meal);
+              // ontogglefavorite(meal);
             },
             icon: const Icon(Icons.star),
           ),

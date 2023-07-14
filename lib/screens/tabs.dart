@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:meals/modal/meal.dart';
 import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/filters.dart';
 import 'package:meals/screens/mealscreen.dart';
 import 'package:meals/widgets/drawer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/provider/mealsprovider.dart';
+import 'package:meals/provider/favouriteprovider.dart';
 
 const kinitialfilters = {
   Filter.GlutenFree: false,
@@ -24,7 +24,6 @@ class Tabs extends ConsumerStatefulWidget {
 class _TabsState extends ConsumerState<Tabs> {
   Map<Filter, bool> _filters = kinitialfilters;
   int _selectedpageindex = 0;
-  final List<Meal> favoriteMeals = [];
 
   void _selectpage(int index) {
     setState(() {
@@ -39,19 +38,6 @@ class _TabsState extends ConsumerState<Tabs> {
         content: Text(message),
       ),
     );
-  }
-
-  void _togglemealfavstatus(Meal meal) {
-    final isexisting = favoriteMeals.contains(meal);
-    setState(() {
-      if (isexisting) {
-        favoriteMeals.remove(meal);
-        showinfomessage("Removed from favorites!");
-      } else {
-        favoriteMeals.add(meal);
-        showinfomessage("Added to favorites!");
-      }
-    });
   }
 
   void onSelectScreen(String screen) async {
@@ -81,6 +67,7 @@ class _TabsState extends ConsumerState<Tabs> {
 
     //to reexecute the build method
     //ref.watch()
+
     final meals = ref.watch(mealsProvider);
     final avaialblemeals = meals.where((meal) {
       if (_filters[Filter.GlutenFree]! && !meal.isGlutenFree) {
@@ -99,12 +86,14 @@ class _TabsState extends ConsumerState<Tabs> {
       return true;
     }).toList();
 
-    Widget activestate = CategoriesScreen(
-        ontogglefavorite: _togglemealfavstatus, availablemeals: avaialblemeals);
+    Widget activestate = CategoriesScreen(availablemeals: avaialblemeals);
     String activepagetitle = "Categories";
     if (_selectedpageindex == 1) {
+      final favoriteMeals = ref.watch(favoritemealsprovider);
+
       activestate = MealScreen(
-          meals: favoriteMeals, togglemealfavstatus: _togglemealfavstatus);
+        meals: favoriteMeals,
+      );
       activepagetitle = "Favorites";
     }
     return Scaffold(

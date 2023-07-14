@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 //import riverpod
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //import meal.dart
@@ -17,6 +16,7 @@ class FavoriteMealsNotifier extends StateNotifier<List<Meal>> {
   }
 }
 
-final favoritemealsprovider = StateNotifierProvider<FavoriteMealsNotifier,List<Meal>>((ref) {
+final favoritemealsprovider =
+    StateNotifierProvider<FavoriteMealsNotifier, List<Meal>>((ref) {
   return FavoriteMealsNotifier();
 });
