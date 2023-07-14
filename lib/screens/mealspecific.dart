@@ -15,15 +15,17 @@ class MealSpecific extends ConsumerWidget {
 
   @override
   Widget build(context, WidgetRef ref) {
+    bool addingstatus = false;
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
         actions: [
           IconButton(
             onPressed: () {
-              final addingstatus = ref
+              addingstatus = ref
                   .read(favoritemealsprovider.notifier)
                   .togglemealfavoritestatus(meal);
+
               ScaffoldMessenger.of(context).clearSnackBars();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -33,7 +35,9 @@ class MealSpecific extends ConsumerWidget {
                 ),
               );
             },
-            icon: const Icon(Icons.star),
+            icon: addingstatus
+                ? const Icon(Icons.star)
+                : const Icon(Icons.star_border),
           ),
         ],
       ),
