@@ -76,10 +76,13 @@ class MealSpecific extends ConsumerWidget {
                     elevation: 30,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10.0),
-                      child: Image.network(
-                        meal.imageUrl,
-                        fit: BoxFit.cover,
-                        //width: 20,
+                      child: Hero(
+                        tag: meal.id,
+                        child: Image.network(
+                          meal.imageUrl,
+                          fit: BoxFit.cover,
+                          //width: 20,
+                        ),
                       ),
                     ),
                   ),
