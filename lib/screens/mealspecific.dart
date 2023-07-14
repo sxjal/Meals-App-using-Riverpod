@@ -39,7 +39,10 @@ class MealSpecific extends ConsumerWidget {
               duration: const Duration(seconds: 2),
               transitionBuilder: (child, animation) => SizeTransition(
                 //  : animation,
-                sizeFactor: animation,
+                sizeFactor: Tween(
+                  begin: 0.0,
+                  end: 2.0,
+                ).animate(animation),
                 child: child,
                 //key: addingstatus ? const ValueKey(1) : const ValueKey(0),
               ),
