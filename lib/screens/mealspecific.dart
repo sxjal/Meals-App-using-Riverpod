@@ -35,9 +35,14 @@ class MealSpecific extends ConsumerWidget {
                 ),
               );
             },
-            icon: addingstatus
-                ? const Icon(Icons.star)
-                : const Icon(Icons.star_border),
+            icon: AnimatedSwitcher(
+              duration: const Duration(seconds: 2),
+              transitionBuilder: (child, animation) =>
+                  SizeTransition(sizeFactor: animation),
+              child: addingstatus
+                  ? const Icon(Icons.star)
+                  : const Icon(Icons.star_border),
+            ), 
           ),
         ],
       ),
