@@ -37,12 +37,19 @@ class MealSpecific extends ConsumerWidget {
             },
             icon: AnimatedSwitcher(
               duration: const Duration(seconds: 2),
-              transitionBuilder: (child, animation) =>
-                  SizeTransition(sizeFactor: animation),
+              transitionBuilder: (child, animation) => SizeTransition(
+                //  : animation,
+                sizeFactor: animation,
+                child: child,
+                //key: addingstatus ? const ValueKey(1) : const ValueKey(0),
+              ),
               child: addingstatus
                   ? const Icon(Icons.star)
-                  : const Icon(Icons.star_border),
-            ), 
+                  : Icon(
+                      Icons.star_border,
+                      key: ValueKey(addingstatus),
+                    ),
+            ),
           ),
         ],
       ),
