@@ -4,7 +4,6 @@ import 'package:meals/screens/filters.dart';
 import 'package:meals/screens/mealscreen.dart';
 import 'package:meals/widgets/drawer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meals/provider/mealsprovider.dart';
 import 'package:meals/provider/favouriteprovider.dart';
 import 'package:meals/provider/filters_provider.dart';
 
@@ -55,8 +54,8 @@ class _TabsState extends ConsumerState<Tabs> {
     //to reexecute the build method
     //ref.watch()
 
-    final meals = ref.watch(mealsProvider);
-    final _filters = ref.watch(filtersprovider);
+    //final meals = ref.watch(mealsProvider);
+    //final _filters = ref.watch(filtersprovider);
     final avaialblemeals = ref.watch(filteredmealsprovider);
 
     Widget activestate = CategoriesScreen(availablemeals: avaialblemeals);

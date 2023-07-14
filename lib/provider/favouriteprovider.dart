@@ -22,3 +22,8 @@ final favoritemealsprovider =
     StateNotifierProvider<FavoriteMealsNotifier, List<Meal>>((ref) {
   return FavoriteMealsNotifier();
 });
+
+final ismealinfavoritesprovider = Provider.family<bool, Meal>((ref, meal) {
+  final meals = ref.watch(favoritemealsprovider);
+  return meals.contains(meal);
+});

@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/provider/favouriteprovider.dart';
 
 class MealSpecific extends ConsumerWidget {
-  const MealSpecific({
+  MealSpecific({
     super.key,
     required this.meal,
   });
@@ -15,8 +15,7 @@ class MealSpecific extends ConsumerWidget {
 
   @override
   Widget build(context, WidgetRef ref) {
-    bool addingstatus = true;
-
+    bool addingstatus = ref.watch(ismealinfavoritesprovider(meal));
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
